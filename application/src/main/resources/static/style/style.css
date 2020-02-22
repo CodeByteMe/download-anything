@@ -1,0 +1,134 @@
+/* 禁止用户在界面上进行选择 */
+* {
+	user-select: none;
+}
+
+/* 滚动条颜色 */
+
+::-webkit-scrollbar {
+	width: 0.375rem;
+	height: 0.25rem;
+	background-color: rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #007bff !important;
+}
+
+::-webkit-scrollbar-track {
+	background-color: rgba(0, 0, 0, .125);
+}
+
+/* 右下角容器 */
+
+.rb-container {
+	position: fixed;
+	right: 1rem;
+	bottom: 1rem;
+}
+
+/* 右下角的几个按钮 */
+
+.rb-button {
+	width: 2.5rem;
+	height: 2.5rem;
+	box-shadow: 0px 1px 20px 0px rgba(0, 0, 0, 0.1), inset 0px -1px 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* 下载类型图标 */
+
+.download-type {
+	width: 6rem;
+	height: 100px;
+}
+
+/* 下载标题 */
+
+.download-title {
+	width: 22rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* 总详情信息动态固定在界面上 */
+#details {
+	position: sticky;
+	top: 1rem;
+}
+
+/* 小屏下的下载状态 */
+.download-status-sm {
+	display: none;
+}
+
+#navBar {
+	display: none !important;
+}
+
+/* 小型电脑 */
+@media (max-width: 1200px) {
+	.download-title {
+		width: 18rem;
+	}
+}
+
+/* 平板 */
+@media (max-width: 992px) {
+}
+
+/* 小型平板 */
+@media (max-width: 768px) {
+	#bookMark {
+		display: none !important;
+	}
+
+	#left {
+		display: none;
+	}
+
+	#navBar {
+		display: flex !important;
+	}
+
+}
+
+/* 普通手机 */
+@media (max-width: 576px) {
+
+	.download-title {
+		width: 18rem;
+	}
+
+	.download-type {
+		display: none !important;
+	}
+
+	.target-path {
+		display: none !important;
+	}
+
+	.download-status-lg {
+		display: none !important;
+	}
+
+	.download-status-sm {
+		display: block !important;
+	}
+
+	.download-control {
+		display: none !important;
+	}
+
+	.download-details {
+		height: 100px;
+	}
+
+	.download-details {
+		padding: 0 !important;
+	}
+}
+
+.top-active {
+	border-bottom: 1px solid #007BFF;
+}
