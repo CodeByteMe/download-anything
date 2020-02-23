@@ -1,36 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>bilibili-downloader</artifactId>
+        <artifactId>download-anything</artifactId>
         <groupId>com.cy</groupId>
         <version>0.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>application</artifactId>
+    <description>主要启动程序</description>
 
     <dependencies>
+        <!--公共数据-->
         <dependency>
             <groupId>com.cy</groupId>
             <artifactId>common-data</artifactId>
             <version>0.0.1</version>
         </dependency>
+        <!--进度条-->
         <dependency>
             <groupId>me.tongfei</groupId>
             <artifactId>progressbar</artifactId>
             <version>0.8.1</version>
         </dependency>
+        <!--BiliBili支持-->
         <dependency>
             <groupId>com.cy</groupId>
             <artifactId>bilibili-support</artifactId>
             <version>0.0.1</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 
     <build>
+        <finalName>download</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

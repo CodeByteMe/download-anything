@@ -13,6 +13,12 @@ import java.util.regex.Pattern;
 public class FileUtils {
 
     /**
+     * 文件名匹配
+     * 字母，数字，空格，部分英文符号，汉字，部分汉字符号
+     */
+    private static Pattern FILE_NAME_PATTERN = Pattern.compile("([\\w\\d\\s~!@#$%^&()_\\-.{}\\[\\]\\u4e00-\\u9fa5\\u3002\\uff1f\\uff01\\uff0c\\u3001\\uff1b\\uff1a\\u201c\\u201d\\u2018\\u2019\\uff08\\uff09\\u300a\\u300b\\u3008\\u3009\\u3010\\u3011\\u300e\\u300f\\u300c\\u300d\\ufe43\\ufe44\\u3014\\u3015\\u2026\\u2014\\uff5e\\ufe4f\\uffe5])+");
+
+    /**
      * 得到可用的文件名（通用性一般不包含特殊的字符，因为范围广，并且太复杂 比如说\U000E字符）
      * 2020年2月8日已经更换匹配方式，从替换错误字符改为匹配正确字符
      *
@@ -32,12 +38,6 @@ public class FileUtils {
         matchRightFileName(sb, fileName);
         return sb.toString().trim();
     }
-
-    /**
-     * 文件名匹配
-     * 字母，数字，空格，部分英文符号，汉字，部分汉字符号
-     */
-    private static Pattern FILE_NAME_PATTERN = Pattern.compile("([\\w\\d\\s~!@#$%^&()_\\-.{}\\[\\]\\u4e00-\\u9fa5\\u3002\\uff1f\\uff01\\uff0c\\u3001\\uff1b\\uff1a\\u201c\\u201d\\u2018\\u2019\\uff08\\uff09\\u300a\\u300b\\u3008\\u3009\\u3010\\u3011\\u300e\\u300f\\u300c\\u300d\\ufe43\\ufe44\\u3014\\u3015\\u2026\\u2014\\uff5e\\ufe4f\\uffe5])+");
 
     /**
      * 匹配正确的文件名

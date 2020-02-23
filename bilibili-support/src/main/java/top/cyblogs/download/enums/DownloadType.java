@@ -64,4 +64,5 @@ public enum DownloadType {
         return "Type{" +
                 "urlPrefix='" + urlPrefix + '\'' +
                 '}';
-    }}
+    }
+}

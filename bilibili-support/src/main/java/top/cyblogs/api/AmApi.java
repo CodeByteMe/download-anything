@@ -1,15 +1,15 @@
 package top.cyblogs.api;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import top.cyblogs.util.JsonUtils;
 import top.cyblogs.utils.BiliBiliUtils;
-import com.fasterxml.jackson.databind.JsonNode;
 
 /**
  * 歌曲专辑的API
  *
  * @author CY
  * @apiNote BiliBili AM API 音频专辑
- *
+ * <p>
  * 2019年7月15日
  */
 public class AmApi {

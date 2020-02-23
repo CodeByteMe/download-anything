@@ -14,10 +14,10 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  */
 public class JsonUtils {
 
+    private static ObjectMapper objectMapper = new ObjectMapper();
+
     private JsonUtils() {
     }
-
-    private static ObjectMapper objectMapper = new ObjectMapper();
 
     public static JsonNode toJsonNode(String json) {
         try {
