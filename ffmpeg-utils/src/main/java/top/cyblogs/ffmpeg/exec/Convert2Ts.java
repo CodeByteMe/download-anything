@@ -2,6 +2,8 @@ package top.cyblogs.ffmpeg.exec;
 
 import top.cyblogs.ffmpeg.command.FFMpegCommand;
 import top.cyblogs.ffmpeg.listener.FFMpegListener;
+import top.cyblogs.ffmpeg.utils.ExecUtils;
+import top.cyblogs.ffmpeg.utils.ProgressUtils;
 import top.cyblogs.util.FileUtils;
 
 import java.io.File;
@@ -11,6 +13,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 视频文件转换为ts,支持单个文件转换和批量转换
+ *
+ * @author CY
  */
 public class Convert2Ts {
 
@@ -30,20 +34,14 @@ public class Convert2Ts {
             listener.start();
         }
 
-        ArrayList<File> newFiles = new ArrayList<>(); // 用来存放已经被转换完成的文件
+        // 用来存放已经被转换完成的文件
+        ArrayList<File> newFiles = new ArrayList<>();
 
         AtomicInteger count = new AtomicInteger(0);
 
         for (File video : videos) {
-            // 替换后缀名为ts
-            int lastPoint = video.getName().lastIndexOf(".");
-            File newFile = new File(video.getAbsolutePath().substring(0, lastPoint) + ".ts");
 
-            newFiles.add(newFile);
-
-            FileUtils.deleteOnExists(newFile);
-
-            exec(video, newFile, new FFMpegListener() {
+            File newFile = exec(video, video, new FFMpegListener() {
                 @Override
                 public void over() {
                     if (listener != null) {
@@ -51,6 +49,8 @@ public class Convert2Ts {
                     }
                 }
             });
+
+            newFiles.add(newFile);
         }
 
         try {
@@ -74,31 +74,36 @@ public class Convert2Ts {
      * @param out      输出路径
      * @param listener 监听器
      */
-    public synchronized static void exec(File video, File out, FFMpegListener listener) {
+    public synchronized static File exec(File video, File out, FFMpegListener listener) {
 
         // 检查参数
         if (video == null || out == null) {
             throw new IllegalArgumentException("转换到TS时参数异常!");
         }
 
+        // 替换后缀名为ts
+        int lastPoint = out.getAbsolutePath().lastIndexOf(".");
+        File newFile = new File(out.getAbsolutePath().substring(0, lastPoint) + ".ts");
+
         if (listener != null) {
             listener.start();
         }
 
-        // 先删除后下载
-        FileUtils.deleteOnExists(out);
-
         // 建立目标文件夹
-        FileUtils.mkdirs(out);
+        FileUtils.mkdirs(newFile);
+
+        FileUtils.deleteOnExists(newFile);
 
         // 获取命令
-        List<String> command = FFMpegCommand.convert2TS(video, out);
+        List<String> command = FFMpegCommand.convert2Ts(video, newFile);
 
+        ProgressUtils progressUtils = new ProgressUtils();
         // 执行命令
-        ExecUtils.exec(command, s -> {
-            // TODO 命令执行进度
-        });
+        ExecUtils.exec(command, s -> progressUtils.watchTimeProgress(s, listener));
 
-        if (listener != null) listener.over();
+        if (listener != null) {
+            listener.over();
+        }
+        return newFile;
     }
 }

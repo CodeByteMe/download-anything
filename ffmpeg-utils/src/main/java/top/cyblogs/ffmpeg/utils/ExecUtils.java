@@ -1,4 +1,4 @@
-package top.cyblogs.ffmpeg.exec;
+package top.cyblogs.ffmpeg.utils;
 
 import top.cyblogs.ffmpeg.exception.FFMpegException;
 
@@ -18,12 +18,12 @@ public class ExecUtils {
      *
      * @param command 命令
      */
-    synchronized static void exec(List<String> command, Consumer<String> consumer) {
+    public synchronized static void exec(List<String> command, Consumer<String> consumer) {
         // 获取控制台实时内容
-        try (BufferedReader scanner = new BufferedReader(new InputStreamReader(new ProcessBuilder(command)
-                .redirectErrorStream(true).start().getInputStream()))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(
+                new ProcessBuilder(command).redirectErrorStream(true).start().getInputStream()))) {
             // 打印控制台的回调
-            scanner.lines().forEach(x -> {
+            reader.lines().forEach(x -> {
                 if (consumer != null) {
                     consumer.accept(x);
                 }

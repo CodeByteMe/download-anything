@@ -2,6 +2,7 @@ package top.cyblogs.service;
 
 import lombok.extern.slf4j.Slf4j;
 import top.cyblogs.data.PathData;
+import top.cyblogs.data.SettingsData;
 import top.cyblogs.download.DownloadListener;
 import top.cyblogs.download.DownloadUtils;
 import top.cyblogs.ffmpeg.exec.MergeVideo;
@@ -31,7 +32,10 @@ public class SegmentVideoService {
      * @param header      下载所需的请求头
      */
     public static void download(String[] segmentUrls, File targetFile, Map<String, String> header) {
-        if (targetFile.exists()) return;
+
+        if (SettingsData.skipIfExists && targetFile.exists()) {
+            return;
+        }
 
         // 下载完成数量计数
         AtomicInteger finishCount = new AtomicInteger(0);

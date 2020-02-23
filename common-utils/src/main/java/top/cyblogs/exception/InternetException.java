@@ -2,6 +2,8 @@ package top.cyblogs.exception;
 
 /**
  * 网络异常
+ *
+ * @author CY
  */
 public class InternetException extends RuntimeException {
 

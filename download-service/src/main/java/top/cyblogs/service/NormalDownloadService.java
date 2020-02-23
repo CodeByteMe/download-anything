@@ -1,5 +1,6 @@
 package top.cyblogs.service;
 
+import top.cyblogs.data.SettingsData;
 import top.cyblogs.download.DownloadListener;
 import top.cyblogs.download.DownloadUtils;
 import top.cyblogs.output.Aria2cStatus;
@@ -17,6 +18,10 @@ public class NormalDownloadService {
      * @param header     下载所需的请求头
      */
     public static void download(String url, File targetFile, Map<String, String> header) {
+
+        if (SettingsData.skipIfExists && targetFile.exists()) {
+            return;
+        }
 
         FileUtils.mkdirs(targetFile);
 

@@ -14,9 +14,9 @@ public abstract class FFMpegListener {
     }
 
     /**
-     * 进度信息 TODO
+     * 进度信息
      */
-    public void progress(double current, double total) {
+    public void progress(long current, long total) {
     }
 
     /**

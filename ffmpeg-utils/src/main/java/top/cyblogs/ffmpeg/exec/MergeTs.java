@@ -2,6 +2,8 @@ package top.cyblogs.ffmpeg.exec;
 
 import top.cyblogs.ffmpeg.command.FFMpegCommand;
 import top.cyblogs.ffmpeg.listener.FFMpegListener;
+import top.cyblogs.ffmpeg.utils.ExecUtils;
+import top.cyblogs.ffmpeg.utils.ProgressUtils;
 import top.cyblogs.util.FileUtils;
 
 import java.io.File;
@@ -9,13 +11,15 @@ import java.util.List;
 
 /**
  * 合并ts文件
+ *
+ * @author CY
  */
 public class MergeTs {
 
 
     /**
      * 合并多个视频文件到一个视频文件中（这个方法只支持TS或者FLV的合并，所以合并之前一定要先转换为TS或FLV文件）
-     * 【源文件不会被删除】
+     * [源文件不会被删除]
      *
      * @param videos   视频文件列表
      * @param out      文件输出位置
@@ -32,18 +36,20 @@ public class MergeTs {
             listener.start();
         }
 
-        // 如果存在就删除
-        FileUtils.deleteOnExists(out);
-
         // 建立目标文件夹
         FileUtils.mkdirs(out);
 
+        // 如果存在就删除
+        FileUtils.deleteOnExists(out);
+
         // 获取命令
-        List<String> command = FFMpegCommand.mergeTS(videos, out);
+        List<String> command = FFMpegCommand.mergeTs(videos, out);
+
+        ProgressUtils progressUtils = new ProgressUtils();
 
         // 执行命令
         ExecUtils.exec(command, s -> {
-            // TODO 命令执行进度
+            progressUtils.watchTimeProgress(s, listener);
         });
 
         try {
@@ -52,6 +58,8 @@ public class MergeTs {
         } catch (InterruptedException ignored) {
         }
 
-        if (listener != null) listener.over();
+        if (listener != null) {
+            listener.over();
+        }
     }
 }

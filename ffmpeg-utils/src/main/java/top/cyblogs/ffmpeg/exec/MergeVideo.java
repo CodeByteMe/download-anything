@@ -4,6 +4,7 @@ import top.cyblogs.data.PathData;
 import top.cyblogs.ffmpeg.command.FFMpegCommand;
 import top.cyblogs.ffmpeg.exception.FFMpegException;
 import top.cyblogs.ffmpeg.listener.FFMpegListener;
+import top.cyblogs.ffmpeg.utils.ExecUtils;
 import top.cyblogs.util.FileUtils;
 
 import java.io.File;
@@ -36,11 +37,11 @@ public class MergeVideo {
             listener.start();
         }
 
-        // 存在就删除
-        FileUtils.deleteOnExists(out);
-
         // 建立目标文件夹
         FileUtils.mkdirs(out);
+
+        // 存在就删除
+        FileUtils.deleteOnExists(out);
 
         // 将文件列表写入分离器文件
         File seperatorFile = new File(PathData.TEMP_FILE_PATH + UUID.randomUUID() + ".txt");
@@ -69,6 +70,8 @@ public class MergeVideo {
 
         FileUtils.deleteOnExists(seperatorFile);
 
-        if (listener != null) listener.over();
+        if (listener != null) {
+            listener.over();
+        }
     }
 }

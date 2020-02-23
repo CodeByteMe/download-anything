@@ -1,5 +1,10 @@
 package top.cyblogs.data;
 
+/**
+ * 用来存放一些HTTP相关的信息
+ *
+ * @author CY
+ */
 public class HttpData {
 
     /**
@@ -31,5 +36,4 @@ public class HttpData {
      * Aria2c的Release URL
      */
     public static final String ARIA2C_RELEASE_URL = "https://api.github.com/repos/aria2/aria2/releases/latest";
-
 }

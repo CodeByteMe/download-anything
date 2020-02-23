@@ -13,10 +13,13 @@ import java.util.stream.Collectors;
  */
 public class FFMpegCommand {
 
+    /**
+     * FFMpeg的路径
+     */
     private static final String FFMPEG = PathData.FFMPEG.getAbsolutePath();
 
     /**
-     * 使用分离器文件合并视频
+     * 使用分离器文件合并视频的命令
      */
     public static List<String> mergeVideo(File seperator, File out) {
         return List.of(
@@ -41,7 +44,8 @@ public class FFMpegCommand {
                 String.format("\"%s\"", FFMPEG),
                 "-i", String.format("\"%s\"", video.getAbsolutePath()),
                 "-i", String.format("\"%s\"", audio.getAbsolutePath()),
-                "-c:v", "copy", "-c:a", "aac", "-strict", "experimental", "-map", "0:v:0?", "-map", "1:a:0?",
+                "-c:v", "copy", "-c:a", "aac", "-strict",
+                "experimental", "-map", "0:v:0?", "-map", "1:a:0?",
                 String.format("\"%s\"", out.getAbsolutePath())
         );
     }
@@ -51,25 +55,31 @@ public class FFMpegCommand {
      *
      * @return 命令
      */
-    public static List<String> downloadM3U8(String m3u8URL, File out) {
+    public static List<String> downloadM3U8(String m3U8Url, File out) {
+
         return List.of(
                 String.format("\"%s\"", FFMPEG),
-                "-allowed_extensions", "ALL", "-protocol_whitelist", "\"file,http,https,rtp,udp,tcp,tls,crypto\"",
-                "-i", String.format("\"%s\"", m3u8URL),
-                "-c", "copy", String.format("\"%s\"", out.getAbsolutePath())
+                "-allowed_extensions", "ALL", "-protocol_whitelist",
+                "\"file,http,https,rtp,udp,tcp,tls,crypto\"",
+                "-i", String.format("\"%s\"", m3U8Url), "-c",
+                "copy", String.format("\"%s\"", out.getAbsolutePath())
         );
     }
 
     /**
-     * 合并视频文件命令（该命令使用了concat的方式，所以只能合并TS文件）
+     * 合并视频文件的命令（该命令使用了concat的方式，所以只能合并TS文件）
      *
      * @return 命令
      */
-    public static List<String> mergeTS(List<File> videos, File out) {
+    public static List<String> mergeTs(List<File> videos, File out) {
+
+        String videosJoin = videos.stream()
+                .map(File::getAbsolutePath)
+                .collect(Collectors.joining("|"));
+
         return List.of(
-                String.format("\"%s\"", FFMPEG),
-                "-i", String.format("\"concat:%s\"", videos.stream().map(File::getAbsolutePath)
-                        .collect(Collectors.joining("|"))),
+                String.format("\"%s\"", FFMPEG), "-i",
+                String.format("\"concat:%s\"", videosJoin),
                 "-c", "copy", "-bsf:a", "aac_adtstoasc",
                 String.format("\"%s\"", out.getAbsolutePath())
         );
@@ -80,7 +90,7 @@ public class FFMpegCommand {
      *
      * @return 命令
      */
-    public static List<String> convert2TS(File video, File out) {
+    public static List<String> convert2Ts(File video, File out) {
 
         // 全部替换成.ts后缀
         String path = out.getAbsolutePath();

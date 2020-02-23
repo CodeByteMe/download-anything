@@ -2,6 +2,7 @@ package top.cyblogs.ffmpeg.exec;
 
 import top.cyblogs.ffmpeg.command.FFMpegCommand;
 import top.cyblogs.ffmpeg.listener.FFMpegListener;
+import top.cyblogs.ffmpeg.utils.ExecUtils;
 import top.cyblogs.util.FileUtils;
 
 import java.io.File;
@@ -32,10 +33,10 @@ public class MergeVideoAndAudio {
             listener.start();
         }
 
-        FileUtils.deleteOnExists(out);
-
         // 建立目标文件夹
         FileUtils.mkdirs(out);
+
+        FileUtils.deleteOnExists(out);
 
         // 获取命令
         List<String> command = FFMpegCommand.mergeVideoAndAudio(video, audio, out);
@@ -51,6 +52,8 @@ public class MergeVideoAndAudio {
         } catch (InterruptedException ignored) {
         }
 
-        if (listener != null) listener.over();
+        if (listener != null) {
+            listener.over();
+        }
     }
 }
