@@ -18,4 +18,6 @@ java -jar ./application/target/download.jar
 
 默认的路径在用户目录下的Downloads文件夹里面，暂时不支持更换
 
+项目中要添加下载列表选择，并且使用Vue-cli改写前端...
+
 ![](http://p.qlogo.cn/qqmail_head/Q3auHgzwzM4g2cLj1J8wBePWc7IpPAic1jnZaaSEhrYuibw5AhZgdeWic8h6zTLd8cKgYiaYjEwj8KmfmE1LBR92RrKfMTe5ib5qOKd5iaRy4pcNM/0)

@@ -14,9 +14,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 视频文件转换为ts,支持单个文件转换和批量转换
  *
- * @author CY
+ * @author CY 测试通过
  */
 public class Convert2Ts {
+
+    private static final String HLS_EXTENSION_NAME = ".ts";
 
     /**
      * 将视频文件转换为TS文件
@@ -67,8 +69,7 @@ public class Convert2Ts {
     }
 
     /**
-     * 转换视频文件到TS格式
-     * 【支持单文件的转换】
+     * 转换单文件视频文件到TS格式
      *
      * @param video    视频文件
      * @param out      输出路径
@@ -81,10 +82,16 @@ public class Convert2Ts {
             throw new IllegalArgumentException("转换到TS时参数异常!");
         }
 
-        // 替换后缀名为ts
-        int lastPoint = out.getAbsolutePath().lastIndexOf(".");
-        File newFile = new File(out.getAbsolutePath().substring(0, lastPoint) + ".ts");
+        // 输入的文件本来就是ts后缀的
+        String videoAbsolutePath = video.getAbsolutePath();
+        String extensionName = videoAbsolutePath.substring(video.getAbsolutePath().lastIndexOf("."));
+        if (HLS_EXTENSION_NAME.equalsIgnoreCase(extensionName)) {
+            return video;
+        }
 
+        // 替换输出文件后缀名为ts
+        String outAbsolutePath = out.getAbsolutePath();
+        File newFile = new File(outAbsolutePath.substring(0, outAbsolutePath.lastIndexOf(".")) + HLS_EXTENSION_NAME);
         if (listener != null) {
             listener.start();
         }
@@ -92,18 +99,21 @@ public class Convert2Ts {
         // 建立目标文件夹
         FileUtils.mkdirs(newFile);
 
+        // 存在就删除
         FileUtils.deleteOnExists(newFile);
 
         // 获取命令
         List<String> command = FFMpegCommand.convert2Ts(video, newFile);
 
         ProgressUtils progressUtils = new ProgressUtils();
+
         // 执行命令
         ExecUtils.exec(command, s -> progressUtils.watchTimeProgress(s, listener));
 
         if (listener != null) {
             listener.over();
         }
+
         return newFile;
     }
 }

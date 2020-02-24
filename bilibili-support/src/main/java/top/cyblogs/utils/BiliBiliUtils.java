@@ -1,7 +1,7 @@
 package top.cyblogs.utils;
 
 
-import top.cyblogs.BiliBiliData;
+import top.cyblogs.data.BiliBiliData;
 import top.cyblogs.exception.InternetException;
 
 import java.io.IOException;

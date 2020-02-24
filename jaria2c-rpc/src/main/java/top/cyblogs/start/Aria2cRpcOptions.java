@@ -95,7 +95,7 @@ public class Aria2cRpcOptions {
      * 默认值：6800
      */
     @OptionName("rpc-listen-port")
-    private Integer rpcListenPort = 6800;
+    private int rpcListenPort = 6800;
     /**
      * https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-rpc-max-request-size
      * <p>

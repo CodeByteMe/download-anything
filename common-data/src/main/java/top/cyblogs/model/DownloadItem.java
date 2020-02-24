@@ -15,6 +15,11 @@ import top.cyblogs.model.enums.DownloadType;
 public class DownloadItem {
 
     /**
+     * 下载的状态
+     */
+    private DownloadStatus status;
+
+    /**
      * 下载的类型
      */
     private DownloadType downloadType;
@@ -25,11 +30,6 @@ public class DownloadItem {
     private String fileName;
 
     /**
-     * 下载的状态
-     */
-    private DownloadStatus status;
-
-    /**
      * 状态文本，人为规定
      */
     private String statusFormat;
@@ -37,12 +37,7 @@ public class DownloadItem {
     /**
      * 总尺寸
      */
-    private long totalSize;
-
-    /**
-     * 下载尺寸
-     */
-    private long downloadSize;
+    private String totalSize;
 
     /**
      * 目标位置
@@ -57,5 +52,15 @@ public class DownloadItem {
     /**
      * 当前速度
      */
-    private long currentSpeed;
+    private String currentSpeed;
+
+    /**
+     * 当前进度
+     */
+    private String progressFormat;
+
+    /**
+     * 当前进度
+     */
+    private Double progress;
 }

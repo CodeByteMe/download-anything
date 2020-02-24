@@ -1,9 +1,11 @@
 package top.cyblogs.download.downloader;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import top.cyblogs.BiliBiliData;
 import top.cyblogs.api.AuApi;
+import top.cyblogs.data.BiliBiliData;
 import top.cyblogs.data.SettingsData;
+import top.cyblogs.model.DownloadItem;
+import top.cyblogs.model.enums.DownloadType;
 import top.cyblogs.service.NormalDownloadService;
 import top.cyblogs.util.StringUtils;
 import top.cyblogs.utils.BiliBiliUtils;
@@ -27,6 +29,10 @@ public class AuDownloader {
         }
         JsonNode musicUrl = AuApi.getMusicUrl(playId);
         String downloadUrl = musicUrl.findValue("data").findValue("cdns").get(0).asText();
-        NormalDownloadService.download(downloadUrl, new File(SettingsData.path + title + ".mp3"), BiliBiliData.header);
+        DownloadItem mp3Status = new DownloadItem();
+        mp3Status.setSource(BiliBiliData.SOURCE);
+        mp3Status.setDownloadType(DownloadType.AUDIO);
+        NormalDownloadService.download(downloadUrl, new File(SettingsData.path + title + ".mp3"),
+                BiliBiliData.header, mp3Status);
     }
 }

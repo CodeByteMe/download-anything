@@ -2,12 +2,14 @@ package top.cyblogs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import top.cyblogs.init.DownloadAria2c;
 import top.cyblogs.init.DownloadFFMpeg;
 
 /**
- * 这是我写过最自由的代码了，真的是想到哪写到哪，毕竟是打草稿嘛，你应当向往自由的
+ * 程序启动类
  */
+@EnableScheduling
 @SpringBootApplication
 public class Application {
 

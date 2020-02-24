@@ -3,6 +3,7 @@ package top.cyblogs.ffmpeg.exec;
 import top.cyblogs.ffmpeg.command.FFMpegCommand;
 import top.cyblogs.ffmpeg.listener.FFMpegListener;
 import top.cyblogs.ffmpeg.utils.ExecUtils;
+import top.cyblogs.ffmpeg.utils.ProgressUtils;
 import top.cyblogs.util.FileUtils;
 
 import java.io.File;
@@ -10,6 +11,8 @@ import java.util.List;
 
 /**
  * 合并视频和音频
+ *
+ * @author CY 测试通过
  */
 public class MergeVideoAndAudio {
 
@@ -41,9 +44,10 @@ public class MergeVideoAndAudio {
         // 获取命令
         List<String> command = FFMpegCommand.mergeVideoAndAudio(video, audio, out);
 
+        ProgressUtils progressUtils = new ProgressUtils();
         // 执行命令
         ExecUtils.exec(command, s -> {
-            // TODO 命令执行进度
+            progressUtils.watchTimeProgress(s, listener);
         });
 
         try {

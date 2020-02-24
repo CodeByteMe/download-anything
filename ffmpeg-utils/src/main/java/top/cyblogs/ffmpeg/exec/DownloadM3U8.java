@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
 /**
  * 下载M3U8
  *
- * @author CY
+ * @author CY 测试通过
  */
 public class DownloadM3U8 {
 

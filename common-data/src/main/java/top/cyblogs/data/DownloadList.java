@@ -10,10 +10,10 @@ import java.util.List;
  *
  * @author CY
  */
-public class DownloadData {
+public class DownloadList {
 
     /**
      * 用来存放下载列表
      */
-    public transient static List<DownloadItem> downloadList = new ArrayList<>();
+    public transient static List<DownloadItem> list = new ArrayList<>();
 }

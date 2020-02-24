@@ -30,7 +30,7 @@ public class Aria2cPeer {
      * 对等体的端口号。
      */
     @JsonProperty("port")
-    private Integer port;
+    private int port;
 
     /**
      * 对等体下载进度的十六进制表示形式。
@@ -57,13 +57,13 @@ public class Aria2cPeer {
      * 该客户端从对等方获得的下载速度（字节/秒）。
      */
     @JsonProperty("downloadSpeed")
-    private Long downloadSpeed;
+    private long downloadSpeed;
 
     /**
      * 此客户端上载到对等方的上载速度（字节/秒）
      */
     @JsonProperty("uploadSpeed")
-    private Long uploadSpeed;
+    private long uploadSpeed;
 
     /**
      * true如果此对等方是播种机。否则false。

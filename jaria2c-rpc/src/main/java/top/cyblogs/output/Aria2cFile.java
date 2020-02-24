@@ -18,7 +18,7 @@ public class Aria2cFile {
      * 文件的索引，从1开始，与文件在多文件torrent中的显示顺序相同。
      */
     @JsonProperty("index")
-    private Integer index;
+    private int index;
 
     /**
      * 文件路径。
@@ -30,7 +30,7 @@ public class Aria2cFile {
      * 文件大小（以字节为单位）。
      */
     @JsonProperty("length")
-    private Long length;
+    private long length;
 
     /**
      * 此文件的完整长度（以字节为单位）。
@@ -39,7 +39,7 @@ public class Aria2cFile {
      * 在另一方面，completedLength 在aria2.tellStatus()还包括部分完成的块。
      */
     @JsonProperty("completedLength")
-    private Long completedLength;
+    private long completedLength;
 
     /**
      * true如果通过--select-file选项选择了此文件。

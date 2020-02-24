@@ -1,8 +1,8 @@
 package top.cyblogs.service;
 
 import org.springframework.stereotype.Service;
-import top.cyblogs.BiliBiliSupport;
 import top.cyblogs.exception.UrlNotSupportException;
+import top.cyblogs.support.BiliBiliSupport;
 
 @Service
 public class MDownloadService {

@@ -50,7 +50,7 @@ public class MoocDownloader {
                     if ("hls".equals(format)) {
                         HlsVideoService.download(realUrl, new File(BaseData.path + title + ".mp4"));
                     } else if ("flv".equals(format)) {
-                        NormalDownloadService.download(realUrl, new File(BaseData.path + title + ".flv"), null);
+                        NormalDownloadService.execDownload(realUrl, new File(BaseData.path + title + ".flv"), null);
                     }
                 }
 

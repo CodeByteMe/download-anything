@@ -3,9 +3,11 @@ package top.cyblogs.download;
 import top.cyblogs.output.Aria2cStatus;
 
 /**
- * 下载工具类的回调
+ * 下载工具类的回调，每个回调对应一个状态，这些状态全部来源于aria2c-rpc中获取的状态
+ *
+ * @author CY
  */
-public abstract class DownloadListener {
+public abstract class BaseDownloadListener {
 
     /**
      * 当前下载中/种子下载中

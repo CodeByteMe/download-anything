@@ -1,5 +1,6 @@
-package top.cyblogs;
+package top.cyblogs.support;
 
+import top.cyblogs.data.BiliBiliData;
 import top.cyblogs.download.downloader.*;
 import top.cyblogs.download.enums.DownloadType;
 

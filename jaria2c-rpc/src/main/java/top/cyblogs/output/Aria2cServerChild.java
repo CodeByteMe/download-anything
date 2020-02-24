@@ -30,5 +30,5 @@ public class Aria2cServerChild {
      * 下载速度（字节/秒）
      */
     @JsonProperty("downloadSpeed")
-    private Long downloadSpeed;
+    private long downloadSpeed;
 }

@@ -1,9 +1,11 @@
 package top.cyblogs.download.downloader;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import top.cyblogs.BiliBiliData;
 import top.cyblogs.api.LiveApi;
+import top.cyblogs.data.BiliBiliData;
 import top.cyblogs.data.SettingsData;
+import top.cyblogs.model.DownloadItem;
+import top.cyblogs.model.enums.DownloadType;
 import top.cyblogs.service.NormalDownloadService;
 import top.cyblogs.util.FileUtils;
 import top.cyblogs.utils.BiliBiliUtils;
@@ -30,11 +32,16 @@ public class LiveDownloader {
         JsonNode roomInfo = infoByRoom.findValue("data").findValue("room_info");
         String roomTitle = FileUtils.getPrettyFileName(roomInfo.findValue("title").asText());
         int liveStatus = roomInfo.findValue("live_status").asInt();
+
+        DownloadItem videoStatus = new DownloadItem();
+        videoStatus.setSource(BiliBiliData.SOURCE);
+        videoStatus.setDownloadType(DownloadType.VIDEO);
+
         if (liveStatus == 1) {
             // 获取下载地址
             JsonNode roomPlayInfo = LiveApi.getPlayUrl(playId);
             String liveUrl = roomPlayInfo.findValue("data").findValue("durl").get(0).findValue("url").asText();
-            NormalDownloadService.download(liveUrl, new File(SettingsData.path + roomTitle + ".flv"), BiliBiliData.header);
+            NormalDownloadService.download(liveUrl, new File(SettingsData.path + roomTitle + ".flv"), BiliBiliData.header, videoStatus);
         } else if (liveStatus == 2) {
             // 轮播
             System.err.println("轮播中");

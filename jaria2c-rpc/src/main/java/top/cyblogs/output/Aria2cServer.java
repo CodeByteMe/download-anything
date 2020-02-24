@@ -19,7 +19,7 @@ public class Aria2cServer {
      * 与文件在多文件metalink中出现的顺序相同
      */
     @JsonProperty("index")
-    private Integer index;
+    private int index;
 
     @JsonProperty("servers")
     private Aria2cServerChild[] servers;

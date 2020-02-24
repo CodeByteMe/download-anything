@@ -40,19 +40,19 @@ public class Aria2cStatus {
      * 下载的总长度（以字节为单位）。
      */
     @JsonProperty("totalLength")
-    private Long totalLength;
+    private long totalLength;
 
     /**
      * 下载的完整长度（以字节为单位）。
      */
     @JsonProperty("completedLength")
-    private Long completedLength;
+    private long completedLength;
 
     /**
      * 上载的下载长度（以字节为单位）。
      */
     @JsonProperty("uploadLength")
-    private Long uploadLength;
+    private long uploadLength;
 
     /**
      * 下载进度的十六进制表示。
@@ -68,13 +68,13 @@ public class Aria2cStatus {
      * 此下载的下载速度以字节/秒为单位
      */
     @JsonProperty("downloadSpeed")
-    private Long downloadSpeed;
+    private long downloadSpeed;
 
     /**
      * 此下载的上传速度（以字节/秒为单位）
      */
     @JsonProperty("uploadSpeed")
-    private Long uploadSpeed;
+    private long uploadSpeed;
 
     /**
      * InfoHash。仅限BitTorrent。
@@ -86,7 +86,7 @@ public class Aria2cStatus {
      * aria2所连接的播种机数量。仅限BitTorrent
      */
     @JsonProperty("numSeeders")
-    private Integer numSeeders;
+    private int numSeeders;
 
     /**
      * true如果本地端点是播种者。否则false。仅限BitTorrent
@@ -98,19 +98,19 @@ public class Aria2cStatus {
      * 片段长度（以字节为单位）
      */
     @JsonProperty("pieceLength")
-    private Long pieceLength;
+    private long pieceLength;
 
     /**
      * 块数
      */
     @JsonProperty("numPieces")
-    private Long numPieces;
+    private long numPieces;
 
     /**
      * aria2已连接的对等/服务器数。
      */
     @JsonProperty("connections")
-    private Integer connections;
+    private int connections;
 
     /**
      * 此项最后错误的代码（如果有）。
@@ -119,7 +119,7 @@ public class Aria2cStatus {
      * 此值仅适用于停止/完成的下载。
      */
     @JsonProperty("errorCode")
-    private Integer errorCode;
+    private int errorCode;
 
     /**
      * 与（相关的）人类可读的错误消息 errorCode。
@@ -176,7 +176,7 @@ public class Aria2cStatus {
      * 仅当对该下载进行哈希检查时，该key才存在
      */
     @JsonProperty("verifiedLength")
-    private Long verifiedLength;
+    private long verifiedLength;
 
     /**
      * true如果此下载正在等待队列中的哈希检查。
@@ -184,6 +184,4 @@ public class Aria2cStatus {
      */
     @JsonProperty("verifyIntegrityPending")
     private Boolean verifyIntegrityPending;
-
-
 }

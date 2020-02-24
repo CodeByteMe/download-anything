@@ -1,5 +1,6 @@
 package top.cyblogs.controller.api;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.cyblogs.model.response.BaseResponse;
@@ -7,8 +8,12 @@ import top.cyblogs.service.MDownloadService;
 
 import javax.annotation.Resource;
 
+/**
+ * @author CY
+ */
 @RestController
 @RequestMapping("download")
+@CrossOrigin(origins = "*")
 public class DownloadController {
 
     @Resource

@@ -10,6 +10,8 @@ import java.util.function.Consumer;
 
 /**
  * FFMpeg命令的执行器
+ *
+ * @author CY
  */
 public class ExecUtils {
 
@@ -29,7 +31,7 @@ public class ExecUtils {
                 }
             });
         } catch (IOException e) {
-            throw new FFMpegException("FFMpeg合并命令执行出错");
+            throw new FFMpegException("FFMpeg命令执行出错!");
         }
     }
 }

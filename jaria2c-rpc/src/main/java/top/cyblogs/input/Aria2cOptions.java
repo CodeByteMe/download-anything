@@ -163,7 +163,7 @@ public class Aria2cOptions {
      * https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-bt-stop-timeout
      */
     @OptionName(value = "bt-stop-timeout")
-    private Long btStopTimeout;
+    private long btStopTimeout;
     /**
      * https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-bt-tracker
      */
@@ -173,17 +173,17 @@ public class Aria2cOptions {
      * https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-bt-tracker-connect-timeout
      */
     @OptionName(value = "bt-tracker-connect-timeout")
-    private Long btTrackerConnectTimeout;
+    private long btTrackerConnectTimeout;
     /**
      * https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-bt-tracker-interval
      */
     @OptionName(value = "bt-tracker-interval")
-    private Long btTrackerInterval;
+    private long btTrackerInterval;
     /**
      * https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-bt-tracker-timeout
      */
     @OptionName(value = "bt-tracker-timeout")
-    private Long btTrackerTimeout;
+    private long btTrackerTimeout;
     /**
      * https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-v
      */
@@ -203,7 +203,7 @@ public class Aria2cOptions {
      * https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-connect-timeout
      */
     @OptionName(value = "connect-timeout")
-    private Long connectTimeout;
+    private long connectTimeout;
     /**
      * https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-content-disposition-default-utf8
      */
@@ -388,7 +388,7 @@ public class Aria2cOptions {
      * https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-x
      */
     @OptionName(value = "max-connection-per-server")
-    private Long maxConnectionPerServer;
+    private long maxConnectionPerServer;
     /**
      * https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-max-download-limit
      */
@@ -398,12 +398,12 @@ public class Aria2cOptions {
      * https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-max-file-not-found
      */
     @OptionName(value = "max-file-not-found")
-    private Long maxFileNotFound;
+    private long maxFileNotFound;
     /**
      * https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-max-mmap-limit
      */
     @OptionName(value = "max-mmap-limit")
-    private Long maxMmapLimit;
+    private long maxMmapLimit;
     /**
      * https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-max-resume-failure-tries
      */
@@ -535,7 +535,7 @@ public class Aria2cOptions {
      * https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-retry-wait
      */
     @OptionName(value = "retry-wait")
-    private Long retryWait;
+    private long retryWait;
     /**
      * https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-reuse-uri
      */
@@ -555,7 +555,7 @@ public class Aria2cOptions {
      * https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-seed-time
      */
     @OptionName(value = "seed-time")
-    private Long seedTime;
+    private long seedTime;
     /**
      * https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-select-file
      */
@@ -580,7 +580,7 @@ public class Aria2cOptions {
      * https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-t
      */
     @OptionName(value = "timeout")
-    private Long timeout;
+    private long timeout;
     /**
      * https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-uri-selector
      */
@@ -606,7 +606,7 @@ public class Aria2cOptions {
     /*=================Global Option=================*/
 
     @OptionName("bt-max-open-files")
-    private Long btMaxOpenFiles;
+    private long btMaxOpenFiles;
 
     @OptionName("download-result")
     private String downloadResult;
@@ -621,16 +621,16 @@ public class Aria2cOptions {
     private String logLevel;
 
     @OptionName("max-concurrent-downloads")
-    private Long maxConcurrentDownloads;
+    private long maxConcurrentDownloads;
 
     @OptionName("max-download-result")
-    private Long maxDownloadResult;
+    private long maxDownloadResult;
 
     @OptionName("max-overall-download-limit")
-    private Long maxOverallDownloadLimit;
+    private long maxOverallDownloadLimit;
 
     @OptionName("max-overall-upload-limit")
-    private Long maxOverallUploadLimit;
+    private long maxOverallUploadLimit;
 
     @OptionName("optimize-concurrent-downloads")
     private Boolean optimizeConcurrentDownloads;

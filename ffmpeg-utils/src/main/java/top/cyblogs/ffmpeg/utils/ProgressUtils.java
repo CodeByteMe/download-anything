@@ -4,19 +4,34 @@ import top.cyblogs.ffmpeg.listener.FFMpegListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * TODO 正在写FFMpeg进度条，项目中要添加下载列表选择，并且使用Vue-cli改写前端...
+ * 监控FFMpeg进度信息
+ *
+ * @author CY
  */
 public class ProgressUtils {
 
+    /**
+     * 解析当前进度中的时间
+     */
     private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("HH:mm:ss.SS");
-    private final Pattern TIME_PATTERN = Pattern.compile("\\d{2}:\\d{2}:\\d{2}\\.\\d{2}");
-    private AtomicLong totalTime = new AtomicLong(0);
 
+    /**
+     * 匹配带有时间的字符串
+     */
+    private final Pattern TIME_PATTERN = Pattern.compile("\\d{2}:\\d{2}:\\d{2}\\.\\d{2}");
+
+    /**
+     * 当前项目的总时间
+     */
+    private long totalTime = 0;
+
+    /**
+     * 监控时间进度
+     */
     public void watchTimeProgress(String s, FFMpegListener listener) {
         if (listener == null) {
             return;
@@ -26,10 +41,11 @@ public class ProgressUtils {
         if (matcher.find()) {
             try {
                 currentTime = DATE_FORMAT.parse(matcher.group(0)).getTime() + 28800000;
-                if (s.contains("Duration")) {
-                    totalTime.set(currentTime);
+                String totalTimePrefix = "Duration";
+                if (s.contains(totalTimePrefix)) {
+                    totalTime = currentTime;
                 } else {
-                    listener.progress(currentTime, totalTime.get());
+                    listener.progress(currentTime, totalTime);
                 }
             } catch (ParseException e) {
                 e.printStackTrace();

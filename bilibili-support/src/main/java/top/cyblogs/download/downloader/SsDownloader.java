@@ -1,10 +1,12 @@
 package top.cyblogs.download.downloader;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import top.cyblogs.BiliBiliData;
 import top.cyblogs.api.EpApi;
 import top.cyblogs.api.SsApi;
+import top.cyblogs.data.BiliBiliData;
 import top.cyblogs.data.SettingsData;
+import top.cyblogs.model.DownloadItem;
+import top.cyblogs.model.enums.DownloadType;
 import top.cyblogs.service.SegmentVideoService;
 import top.cyblogs.service.SeperateVideoService;
 import top.cyblogs.util.FileUtils;
@@ -47,18 +49,22 @@ public class SsDownloader {
 
         JsonNode videoUrl = EpApi.getVideoUrl(epItem.get("aid").asText(), epItem.get("cid").asText(), epItem.get("id").asText());
 
+        DownloadItem videoStatus = new DownloadItem();
+        videoStatus.setSource(BiliBiliData.SOURCE);
+        videoStatus.setDownloadType(DownloadType.VIDEO);
+
         // 如果视频为dash
         JsonNode dash = videoUrl.findValue("dash");
         if (dash != null) {
             String[] dashUrl = getDashUrl(dash);
-            SeperateVideoService.download(dashUrl, new File(SettingsData.path + epTitle + ".mp4"), BiliBiliData.header);
+            SeperateVideoService.download(dashUrl, new File(SettingsData.path + epTitle + ".mp4"), BiliBiliData.header, videoStatus);
             return;
         }
         // 如果视频为durl
         JsonNode durl = videoUrl.findValue("durl");
         if (durl != null) {
             String[] durlUrl = getDurlUrl(durl);
-            SegmentVideoService.download(durlUrl, new File(SettingsData.path + epTitle + ".mp4"), BiliBiliData.header);
+            SegmentVideoService.download(durlUrl, new File(SettingsData.path + epTitle + ".mp4"), BiliBiliData.header, videoStatus);
         }
     }
 

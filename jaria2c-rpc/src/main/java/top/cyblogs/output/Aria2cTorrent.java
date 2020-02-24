@@ -34,7 +34,7 @@ public class Aria2cTorrent {
      * 种子的创建时间。该值是自纪元以来的整数，以秒为单位。
      */
     @JsonProperty("creationDate")
-    private Long creationDate;
+    private long creationDate;
 
     /**
      * torrent的文件模式。值为single或multi。

@@ -8,6 +8,11 @@ package top.cyblogs.model.enums;
 public enum DownloadStatus {
 
     /**
+     * 等待中
+     */
+    WAITING,
+
+    /**
      * 下载中
      */
     DOWNLOADING,
@@ -20,5 +25,10 @@ public enum DownloadStatus {
     /**
      * 垃圾箱
      */
-    TRASH;
+    TRASH,
+
+    /**
+     * 合并
+     */
+    MERGE
 }

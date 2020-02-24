@@ -49,7 +49,7 @@ public class Aria2cOption {
     private Boolean btLoadSavedMetadata;
 
     @JsonProperty("bt-max-peers")
-    private Long btMaxPeers;
+    private long btMaxPeers;
 
     @JsonProperty("bt-metadata-only")
     private Boolean btMetadataOnly;
@@ -61,7 +61,7 @@ public class Aria2cOption {
     private Boolean btRemoveUnselectedFile;
 
     @JsonProperty("bt-request-peer-speed-limit")
-    private Long btRequestPeerSpeedLimit;
+    private long btRequestPeerSpeedLimit;
 
     @JsonProperty("bt-require-crypto")
     private Boolean btRequireCrypto;
@@ -73,16 +73,16 @@ public class Aria2cOption {
     private Boolean btSeedUnverified;
 
     @JsonProperty("bt-stop-timeout")
-    private Long btStopTimeout;
+    private long btStopTimeout;
 
     @JsonProperty("bt-tracker-connect-timeout")
-    private Long btTrackerConnectTimeout;
+    private long btTrackerConnectTimeout;
 
     @JsonProperty("bt-tracker-interval")
-    private Long btTrackerInterval;
+    private long btTrackerInterval;
 
     @JsonProperty("bt-tracker-timeout")
-    private Long btTrackerTimeout;
+    private long btTrackerTimeout;
 
     @JsonProperty("check-integrity")
     private Boolean checkIntegrity;
@@ -91,7 +91,7 @@ public class Aria2cOption {
     private Boolean conditionalGet;
 
     @JsonProperty("connect-timeout")
-    private Long connectTimeout;
+    private long connectTimeout;
 
     @JsonProperty("content-disposition-default-utf8")
     private Boolean contentDispositionDefaultUtf8;
@@ -151,28 +151,28 @@ public class Aria2cOption {
     private Boolean httpNoCache;
 
     @JsonProperty("lowest-speed-limit")
-    private Long lowestSpeedLimit;
+    private long lowestSpeedLimit;
 
     @JsonProperty("max-connection-per-server")
-    private Long maxConnectionPerServer;
+    private long maxConnectionPerServer;
 
     @JsonProperty("max-download-limit")
-    private Long maxDownloadLimit;
+    private long maxDownloadLimit;
 
     @JsonProperty("max-file-not-found")
-    private Long maxFileNotFound;
+    private long maxFileNotFound;
 
     @JsonProperty("max-mmap-limit")
-    private Long maxMmapLimit;
+    private long maxMmapLimit;
 
     @JsonProperty("max-resume-failure-tries")
-    private Long maxResumeFailureTries;
+    private long maxResumeFailureTries;
 
     @JsonProperty("max-tries")
-    private Long maxTries;
+    private long maxTries;
 
     @JsonProperty("max-upload-limit")
-    private Long maxUploadLimit;
+    private long maxUploadLimit;
 
     @JsonProperty("metalink-enable-unique-protocol")
     private Boolean metalinkEnableUniqueProtocol;
@@ -181,10 +181,10 @@ public class Aria2cOption {
     private String metalinkPreferredProtocol;
 
     @JsonProperty("min-split-size")
-    private Long minSplitSize;
+    private long minSplitSize;
 
     @JsonProperty("no-file-allocation-limit")
-    private Long noFileAllocationLimit;
+    private long noFileAllocationLimit;
 
     @JsonProperty("no-netrc")
     private Boolean noNetrc;
@@ -196,7 +196,7 @@ public class Aria2cOption {
     private Boolean pauseMetadata;
 
     @JsonProperty("piece-length")
-    private Long pieceLength;
+    private long pieceLength;
 
     @JsonProperty("proxy-method")
     private String proxyMethod;
@@ -214,7 +214,7 @@ public class Aria2cOption {
     private Boolean removeControlFile;
 
     @JsonProperty("retry-wait")
-    private Long retryWait;
+    private long retryWait;
 
     @JsonProperty("reuse-uri")
     private Boolean reuseUri;
@@ -229,13 +229,13 @@ public class Aria2cOption {
     private Double seedRatio;
 
     @JsonProperty("split")
-    private Long split;
+    private long split;
 
     @JsonProperty("stream-piece-selector")
     private String streamPieceSelector;
 
     @JsonProperty("timeout")
-    private Long timeout;
+    private long timeout;
 
     @JsonProperty("uri-selector")
     private String uriSelector;
@@ -247,13 +247,13 @@ public class Aria2cOption {
     private String userAgent;
 
     @JsonProperty("auto-save-interval")
-    private Long autoSaveInterval;
+    private long autoSaveInterval;
 
     @JsonProperty("bt-detach-seed-only")
     private Boolean btDetachSeedOnly;
 
     @JsonProperty("bt-max-open-files")
-    private Long btMaxOpenFiles;
+    private long btMaxOpenFiles;
 
     @JsonProperty("check-certificate")
     private Boolean checkCertificate;
@@ -280,19 +280,19 @@ public class Aria2cOption {
     private String dhtListenPort;
 
     @JsonProperty("dht-message-timeout")
-    private Long dhtMessageTimeout;
+    private long dhtMessageTimeout;
 
     @JsonProperty("disable-ipv6")
     private Boolean disableIpv6;
 
     @JsonProperty("disk-cache")
-    private Long diskCache;
+    private long diskCache;
 
     @JsonProperty("download-result")
     private String downloadResult;
 
     @JsonProperty("dscp")
-    private Long dscp;
+    private long dscp;
 
     @JsonProperty("enable-color")
     private Boolean enableColor;
@@ -325,16 +325,16 @@ public class Aria2cOption {
     private String logLevel;
 
     @JsonProperty("max-concurrent-downloads")
-    private Long maxConcurrentDownloads;
+    private long maxConcurrentDownloads;
 
     @JsonProperty("max-download-result")
-    private Long maxDownloadResult;
+    private long maxDownloadResult;
 
     @JsonProperty("max-overall-download-limit")
-    private Long maxOverallDownloadLimit;
+    private long maxOverallDownloadLimit;
 
     @JsonProperty("max-overall-upload-limit")
-    private Long maxOverallUploadLimit;
+    private long maxOverallUploadLimit;
 
     @JsonProperty("min-tls-version")
     private String minTlsVersion;
@@ -364,19 +364,19 @@ public class Aria2cOption {
     private Boolean rpcListenAll;
 
     @JsonProperty("rpc-listen-port")
-    private Long rpcListenPort;
+    private long rpcListenPort;
 
     @JsonProperty("rpc-max-request-size")
-    private Long rpcMaxRequestSize;
+    private long rpcMaxRequestSize;
 
     @JsonProperty("rpc-secure")
     private Boolean rpcSecure;
 
     @JsonProperty("save-session-interval")
-    private Long saveSessionInterval;
+    private long saveSessionInterval;
 
     @JsonProperty("server-stat-timeout")
-    private Long serverStatTimeout;
+    private long serverStatTimeout;
 
     @JsonProperty("show-console-readout")
     private Boolean showConsoleReadout;
@@ -385,16 +385,16 @@ public class Aria2cOption {
     private Boolean showFiles;
 
     @JsonProperty("socket-recv-buffer-size")
-    private Long socketRecvBufferSize;
+    private long socketRecvBufferSize;
 
     @JsonProperty("stderr")
     private Boolean stderr;
 
     @JsonProperty("stop")
-    private Long stop;
+    private long stop;
 
     @JsonProperty("summary-interval")
-    private Long summaryInterval;
+    private long summaryInterval;
 
     @JsonProperty("truncate-console-readout")
     private Boolean truncateConsoleReadout;

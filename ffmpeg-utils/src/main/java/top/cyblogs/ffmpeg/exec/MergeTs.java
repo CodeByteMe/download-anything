@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 合并ts文件
  *
- * @author CY
+ * @author CY  测试通过
  */
 public class MergeTs {
 
@@ -46,7 +46,6 @@ public class MergeTs {
         List<String> command = FFMpegCommand.mergeTs(videos, out);
 
         ProgressUtils progressUtils = new ProgressUtils();
-
         // 执行命令
         ExecUtils.exec(command, s -> {
             progressUtils.watchTimeProgress(s, listener);

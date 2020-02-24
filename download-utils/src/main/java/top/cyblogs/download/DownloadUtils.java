@@ -18,7 +18,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 模拟下载，暂时还没有对接Aria2c
+ * 下载工具，对接Aria2c
+ *
+ * @author CY
  */
 public class DownloadUtils {
 
@@ -70,7 +72,7 @@ public class DownloadUtils {
      * @param header           请求头
      * @param downloadListener 监听器
      */
-    public static void download(String url, File out, Map<String, String> header, DownloadListener downloadListener) {
+    public static void download(String url, File out, Map<String, String> header, BaseDownloadListener downloadListener) {
 
         Aria2cOptions options = Aria2cOptions.builder()
                 .header(getHeader(header))
@@ -85,14 +87,14 @@ public class DownloadUtils {
                 Options.of(options), Integer.MAX_VALUE);
 
         // 下载回调
-        callBack(downloadListener, gid);
+        callBack(gid, downloadListener);
     }
 
     /**
      * 下载回调
      */
     @SuppressWarnings("unchecked")
-    private static void callBack(DownloadListener downloadListener, String gid) {
+    private static void callBack(String gid, BaseDownloadListener downloadListener) {
         observer.getPropertyChangeSupport().addPropertyChangeListener(event -> {
             List<Aria2cStatus> statuses = (List<Aria2cStatus>) event.getNewValue();
             Aria2cStatus status = statuses.stream().filter(x -> gid.equals(x.getGid())).findFirst().orElse(null);
@@ -126,6 +128,9 @@ public class DownloadUtils {
                         downloadListener.waiting(status);
                         break;
                     }
+                    default: {
+                        break;
+                    }
                 }
             }
         });
@@ -135,7 +140,9 @@ public class DownloadUtils {
      * 获取Aria2适用的Header
      */
     private static String[] getHeader(Map<String, String> header) {
-        if (header == null) return new String[0];
+        if (header == null) {
+            return new String[0];
+        }
         List<String> headers = new ArrayList<>();
         header.forEach((key, value) -> headers.add(String.format("%s: %s", key, value)));
         return headers.toArray(String[]::new);
