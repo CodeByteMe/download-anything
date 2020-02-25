@@ -32,6 +32,7 @@ public class HlsVideoService {
         downloadStatus.setProgressFormat("0%");
         downloadStatus.setProgress(0D);
         downloadStatus.setCurrentSpeed(null);
+        downloadStatus.setDownloadType(DownloadType.VIDEO);
         downloadStatus.setDownloadId(StringUtils.md5(targetFile.getAbsolutePath()));
         ServiceUtils.addToList(downloadStatus);
 
@@ -39,7 +40,6 @@ public class HlsVideoService {
         if (SettingsData.skipIfExists && targetFile.exists()) {
             downloadStatus.setStatusFormat("文件已存在!");
             downloadStatus.setStatus(DownloadStatus.FINISHED);
-            downloadStatus.setCurrentSpeed(null);
             downloadStatus.setTotalSize(FileUtils.fileLength(targetFile.length()));
             downloadStatus.setProgressFormat("100%");
             downloadStatus.setProgress(100D);
@@ -50,23 +50,19 @@ public class HlsVideoService {
 
         DownloadM3U8.exec(url, targetFile, new FFMpegListener() {
 
-            private long totolTime = 0;
+            private long totalTime = 0;
 
             @Override
             public void start() {
                 // 开始下载
                 downloadStatus.setStatusFormat("正在下载...");
                 downloadStatus.setStatus(DownloadStatus.DOWNLOADING);
-                downloadStatus.setDownloadType(DownloadType.VIDEO);
-                String name = targetFile.getName();
-                downloadStatus.setFileName(name.substring(0, name.lastIndexOf(".")));
                 downloadStatus.setTotalSize("未知大小");
-                downloadStatus.setTargetPath(targetFile.getAbsolutePath());
             }
 
             @Override
             public void progress(long current, long total) {
-                this.totolTime = total;
+                this.totalTime = total;
                 // 下载进度
                 downloadStatus.setProgressFormat(ServiceUtils.ratioString(current, total, false));
                 downloadStatus.setProgress((double) current / total * 100);
@@ -77,9 +73,8 @@ public class HlsVideoService {
                 // 下载完成
                 downloadStatus.setStatusFormat("下载完成!");
                 downloadStatus.setStatus(DownloadStatus.FINISHED);
-                downloadStatus.setProgressFormat(ServiceUtils.ratioString(totolTime, totolTime, false));
+                downloadStatus.setProgressFormat(ServiceUtils.ratioString(totalTime, totalTime, false));
                 downloadStatus.setProgress(100D);
-                downloadStatus.setCurrentSpeed(null);
             }
         });
     }

@@ -1,10 +1,17 @@
 package top.cyblogs.download.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
+
 /**
  * 一个泛型规定下载的类型和该类型对应的URL前缀
  * 使用该泛型类可以使用下载器工厂类获取相应的下载器
  * 2019年7月15日
  */
+@AllArgsConstructor
+@Getter
+@ToString
 public enum DownloadType {
 
     /**
@@ -40,29 +47,4 @@ public enum DownloadType {
      * 该类型的URL前缀
      */
     private String urlPrefix;
-
-    /**
-     * 下载类型
-     *
-     * @param urlPrefix URL前缀
-     */
-    DownloadType(String urlPrefix) {
-        this.urlPrefix = urlPrefix;
-    }
-
-    /**
-     * 获取类型的链接前缀
-     *
-     * @return 返回该类型的链接前缀
-     */
-    public String getUrlPrefix() {
-        return urlPrefix;
-    }
-
-    @Override
-    public String toString() {
-        return "Type{" +
-                "urlPrefix='" + urlPrefix + '\'' +
-                '}';
-    }
 }

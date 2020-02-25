@@ -100,7 +100,6 @@ class TempDownloadService {
                     if (++currentRetryCount <= BaseData.RETRY_COUNT) {
                         log.info("正在重试下载...");
                         downloadStatus.setStatusFormat("重试下载...");
-                        downloadStatus.setProgressFormat(null);
                         DownloadUtils.download(urls[index], targetFile, header, this);
                     }
                 }
@@ -152,6 +151,7 @@ class TempDownloadService {
                             downloadStatus.setCurrentSpeed(null);
                             downloadStatus.setProgressFormat("100%");
                             downloadStatus.setProgress(100.0);
+                            downloadStatus.setStatusFormat("等待合并...");
                             if (listener != null) {
                                 listener.startMerge(tempFiles, targetFile, downloadStatus);
                             }

@@ -43,6 +43,7 @@ public class BiliBiliUtils {
                 return matcher.group(0);
             }
         } catch (MalformedURLException ignored) {
+            throw new IllegalArgumentException("添加下载的URL格式不正确!");
         }
         return null;
     }

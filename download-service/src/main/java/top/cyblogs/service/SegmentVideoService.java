@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * 分段视频下载服务
  *
- * @author CY
+ * @author CY 测试通过
  */
 @Slf4j
 public class SegmentVideoService {
@@ -49,7 +49,7 @@ public class SegmentVideoService {
                 @Override
                 public void progress(long current, long total) {
                     downloadStatus.setProgress((double) current / total * 100);
-                    downloadStatus.setProgressFormat(ServiceUtils.ratioString(current, total, true));
+                    downloadStatus.setProgressFormat(ServiceUtils.ratioString(current, total, false));
                 }
 
                 @Override

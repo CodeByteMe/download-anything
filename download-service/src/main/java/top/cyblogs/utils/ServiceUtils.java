@@ -29,7 +29,7 @@ public class ServiceUtils {
      */
     public static String ratioString(long current, long total, boolean isPercent) {
         if (total == 0) {
-            return isPercent ? "?%" : "-/-";
+            return isPercent ? "--%" : "-/-";
         }
         return isPercent ? PERCENT_FORMAT.format((double) current / total * 100) + "%" : current + "/" + total;
     }

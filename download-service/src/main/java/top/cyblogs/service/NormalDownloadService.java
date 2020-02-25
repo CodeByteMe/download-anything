@@ -79,9 +79,8 @@ public class NormalDownloadService {
             // TODO 需要测试
             @Override
             public void error(Aria2cStatus status) {
-                downloadStatus.setStatusFormat("重试下载...");
-                downloadStatus.setProgressFormat(null);
                 if (++currentRetryCount <= BaseData.RETRY_COUNT) {
+                    downloadStatus.setStatusFormat("重试下载...");
                     DownloadUtils.download(url, targetFile, header, this);
                 }
             }

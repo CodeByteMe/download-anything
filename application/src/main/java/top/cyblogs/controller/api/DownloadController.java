@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.cyblogs.model.response.BaseResponse;
-import top.cyblogs.service.MDownloadService;
+import top.cyblogs.service.ApplicationService;
 
 import javax.annotation.Resource;
 
@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 public class DownloadController {
 
     @Resource
-    private MDownloadService downloadService;
+    private ApplicationService downloadService;
 
     @RequestMapping("addDownload")
     public BaseResponse<String> addDownload(String url, String cookie) {
