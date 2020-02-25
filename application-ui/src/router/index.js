@@ -13,17 +13,12 @@ const routes = [
     {
         path: '/list',
         name: '下载列表',
-        component: () => import(/* webpackChunkName: "about" */ '../views/DownloadList.vue')
+        component: () => import(/* webpackChunkName: "download-list" */ '../views/DownloadList.vue')
     },
     {
         path: '/settings',
-        name: '下载列表',
-        component: () => import(/* webpackChunkName: "about" */ '../views/Settings.vue')
-    },
-    {
-        path: '/about',
-        name: 'About',
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+        name: '设置',
+        component: () => import(/* webpackChunkName: "settings" */ '../views/Settings.vue')
     }
 ];
 

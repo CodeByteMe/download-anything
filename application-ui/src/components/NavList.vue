@@ -1,6 +1,7 @@
 <template>
     <div id="navList">
-        <b-list-group>
+
+    <b-list-group>
 
             <!--首页-->
             <router-link class="d-flex align-items-center" exact

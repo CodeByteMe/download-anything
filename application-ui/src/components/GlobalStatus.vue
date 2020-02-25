@@ -35,7 +35,7 @@
 </script>
 
 <style scoped>
-    /* 总详情信息动态固定在界面上 */
+    /* TODO 总详情信息动态固定在界面上 */
     #globalStatus {
         position: sticky;
         top: 1rem;

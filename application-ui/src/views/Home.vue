@@ -7,7 +7,6 @@
         <div class="my-3">粘贴链接到下面, 然后点击下载按钮</div>
 
         <b-input-group>
-
             <b-form-input placeholder="粘贴URL到这里" type="text"/>
             <b-input-group-append>
                 <b-button variant="outline-secondary">下载</b-button>

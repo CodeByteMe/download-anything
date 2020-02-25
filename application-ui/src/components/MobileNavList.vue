@@ -56,7 +56,7 @@
     }
 
     /* 小型平板 */
-    @media (max-width: 768px) {
+    @media (max-width: 992px) {
         #navBar {
             display: flex !important;
         }

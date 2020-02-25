@@ -1,7 +1,7 @@
 <template>
     <div id="settings">
-        <span class="small">设置 (设置有些是假的，暂时懒得实现了)</span>
 
+        <span class="small">设置 (设置有些是假的，暂时懒得实现了)</span>
 
         <b-form class="mt-3">
             <b-form-group label="下载路径"
@@ -17,6 +17,7 @@
                               placeholder="填写一个数字，请确保网速牛逼" required
                               type="text"/>
             </b-form-group>
+
             <b-button type="button" variant="primary">保存</b-button>
         </b-form>
     </div>

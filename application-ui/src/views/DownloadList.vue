@@ -1,6 +1,7 @@
 <template>
     <div id="downloadList">
-        <section :key="index" v-for="(item, index) in downloadList">
+        <section :key="index"
+                 v-for="(item, index) in downloadList">
             <DownloadItem :class="index === downloadList.length - 1 ? 'border-bottom' : ''"
                           :item="item"
                           class="border-top"/>

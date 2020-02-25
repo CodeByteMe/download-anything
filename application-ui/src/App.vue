@@ -12,6 +12,7 @@
         <!--全局下载状态-->
         <GlobalStatus class="mt-4"/>
       </div>
+
       <!--右侧区域-->
       <div class="col-lg-9 col-md-12" id="right">
 
@@ -44,15 +45,20 @@
 
   export default {
     created() {
-      DownloadListener((x) => {
-        console.dir(x);
-      })
+      this.renderDownloadList();
     },
     components: {
       NavList,
       GlobalTitle,
       GlobalStatus,
       MobileNavList
+    },
+    methods: {
+      renderDownloadList() {
+        DownloadListener((downloadList) => {
+          this.$log.debug(downloadList);
+        });
+      }
     }
   }
 </script>
@@ -79,9 +85,9 @@
     background-color: rgba(0, 0, 0, .125);
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
     #left {
-      display: none;
+      display: none !important;
     }
   }
 </style>

@@ -3,26 +3,22 @@
     <div class="rb-container">
         <!-- 添加下载任务 -->
         <div class="rb-button d-flex justify-content-center align-items-center rounded-circle bg-white"
-             data-placement="left"
-             data-toggle="tooltip" title="添加下载任务">
+             title="添加下载任务" v-b-tooltip.hover.left>
             <font-awesome-icon icon="plus"/>
         </div>
         <!-- 开始所有下载 -->
         <div class="mt-3 rb-button d-flex justify-content-center align-items-center rounded-circle bg-white"
-             data-placement="left"
-             data-toggle="tooltip" title="开始所有下载">
+             title="开始所有下载" v-b-tooltip.hover.left>
             <font-awesome-icon icon="play"/>
         </div>
         <!-- 暂停所有下载 -->
         <div class="mt-3 rb-button d-flex justify-content-center align-items-center rounded-circle bg-white"
-             data-placement="left"
-             data-toggle="tooltip" title="暂停下载任务">
+             title="暂停下载任务" v-b-tooltip.hover.left>
             <font-awesome-icon icon="pause"/>
         </div>
         <!-- 删除所有下载 -->
         <div class="mt-3 rb-button d-flex justify-content-center align-items-center rounded-circle bg-white"
-             data-placement="left"
-             data-toggle="tooltip" title="删除下载任务">
+             title="删除下载任务" v-b-tooltip.hover.left>
             <font-awesome-icon icon="trash"/>
         </div>
     </div>

@@ -1,19 +1,20 @@
 <template>
-
-    <div>
+    <!--一个下载项-->
+    <section>
         <div class="d-flex">
             <!-- 下载类型图标 -->
             <div class="d-flex justify-content-center align-items-center border-right download-type">
                 <font-awesome-icon class="text-danger" icon="file-video" size="3x"/>
             </div>
+
             <!-- 图标右边的一堆信息 -->
             <div class="d-flex flex-column flex-fill px-4 download-details"
                  style="justify-content: space-evenly;">
                 <!-- 第一行信息 -->
                 <section class="d-flex">
-									<span class="font-weight-bold mr-auto download-title">
-										{{item.fileName}}
-									</span>
+                    <span class="font-weight-bold mr-auto download-title">
+                        {{item.fileName}}
+                    </span>
                     <div class="text-muted download-status-lg">
                         {{item.statusFormat}}
                     </div>
@@ -44,7 +45,6 @@
                 </section>
             </div>
 
-
             <!-- 下载控制按钮 -->
             <section class="d-flex justify-content-center align-items-center border-left download-control"
                      style="width: 8rem;">
@@ -62,9 +62,10 @@
         <!-- 进度条 -->
         <div style="background-color: darkgrey">
             <div :class="item.status === 'DOWNLOADING' ? 'bg-danger' : item.status === 'MERGING' ? 'bg-info' : item.status === 'FINISHED' ? 'bg-success' : ''"
-                 :style="`width: ${item.progress}%;`" style="height: 3px;"></div>
+                 :style="`width: ${item.progress}%;`"
+                 style="height: 3px;"></div>
         </div>
-    </div>
+    </section>
 
 </template>
 
@@ -107,12 +108,8 @@
         }
     }
 
-    /* 平板 */
-    @media (max-width: 992px) {
-    }
-
     /* 普通手机 */
-    @media (max-width: 576px) {
+    @media (max-width: 768px) {
 
         .download-title {
             width: 18rem;
@@ -140,9 +137,6 @@
 
         .download-details {
             height: 100px;
-        }
-
-        .download-details {
             padding: 0 !important;
         }
     }
