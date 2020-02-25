@@ -30,5 +30,5 @@ public enum DownloadStatus {
     /**
      * 合并
      */
-    MERGE
+    MERGING
 }

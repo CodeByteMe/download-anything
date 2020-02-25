@@ -5,7 +5,19 @@ new Vue({
         this.connectWebSocket();
     },
     data: {
-        downloadList: [1, 2, 3, 4, 5, 6, 7, 8],
+        downloadList: [{
+            "downloadId": "40e6358a7ccab1b1de61506cea9de561",
+            "status": "FINISHED",
+            "downloadType": "VIDEO",
+            "fileName": "《唐人街探案3》国产巅峰喜剧",
+            "statusFormat": "文件已存在!",
+            "totalSize": "84.54MB",
+            "targetPath": "C:\\Users\\dnydi\\Downloads\\《唐人街探案3》国产巅峰喜剧.mp4",
+            "source": "哔哩哔哩",
+            "currentSpeed": "100M/S",
+            "progressFormat": "100%",
+            "progress": 90.0
+        }],
         currentPage: "index",
         carouselList: [{
             imageUrl: "http://p.qlogo.cn/qqmail_head/Q3auHgzwzM4g2cLj1J8wBePWc7IpPAic1zf6BFE19PfAw4iczE5vMANoGicPMwcDTwMt70J6IcTPJvDY7T18QIefzC7aMBbKibRQiaCED65jCgNY/0",
@@ -13,6 +25,9 @@ new Vue({
             title: "Imooc Downloader",
             des: "Imooc video downloader, not only video"
         }],
+        downloadingCount: 0,
+        finishedCount: 0,
+        trashCount: 0
     },
     methods: {
         changePage(currentPage) {
@@ -23,9 +38,11 @@ new Vue({
             var socket = new SockJS('/socketConnect');
             stompClient = Stomp.over(socket);
             stompClient.debug = null; // 禁用Debug
-            stompClient.connect({}, function (frame) {
+            stompClient.connect({}, (frame) => {
                 console.log('Connected: ' + frame);
-                stompClient.subscribe('/downloadStatus/notice', function (response) {
+                stompClient.subscribe('/downloadStatus/notice', (response) => {
+                    this.downloadList = JSON.parse(response.body);
+                    this.downloadingCount = this.downloadList.length;
                     console.dir(response.body);
                 });
             });
@@ -43,7 +60,6 @@ new Vue({
                     },
                     success: (response) => {
                         if (response.flag) {
-                            this.currentPage = "downloading";
                             Swal.fire(
                                 'OK!',
                                 response.message,
@@ -57,6 +73,7 @@ new Vue({
                                 footer: '如果URL不被支持，请反馈一下...'
                             })
                         }
+                        this.currentPage = "downloading";
                         var loc = window.location;
                         var url = loc.protocol + "//" + loc.host;
                         window.history.replaceState(null, null, url);

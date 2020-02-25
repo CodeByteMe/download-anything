@@ -77,7 +77,7 @@ public class BiliBiliUtils {
             return new String(response.readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
-            throw new InternetException("网络异常...");
+            throw new InternetException("网络异常，请重试...");
         }
     }
 

@@ -15,6 +15,11 @@ import top.cyblogs.model.enums.DownloadType;
 public class DownloadItem {
 
     /**
+     * 下载ID，目标路径的md5值
+     */
+    private String downloadId;
+
+    /**
      * 下载的状态
      */
     private DownloadStatus status;

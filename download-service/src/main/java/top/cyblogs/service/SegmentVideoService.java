@@ -1,7 +1,6 @@
 package top.cyblogs.service;
 
 import lombok.extern.slf4j.Slf4j;
-import top.cyblogs.data.DownloadList;
 import top.cyblogs.ffmpeg.exec.MergeVideo;
 import top.cyblogs.ffmpeg.listener.FFMpegListener;
 import top.cyblogs.model.DownloadItem;
@@ -27,9 +26,8 @@ public class SegmentVideoService {
      * @param targetFile 下载到目标位置
      * @param header     下载所需的请求头
      */
-    public static void download(String[] seperateUrl, File targetFile, Map<String, String> header, DownloadItem downloadStatus) {
-        DownloadList.list.add(downloadStatus);
-        new TempDownloadService().download(seperateUrl, targetFile, header, downloadStatus, SegmentVideoService::mergeVideo);
+    public static void download(String[] segmentUrls, File targetFile, Map<String, String> header, DownloadItem downloadStatus) {
+        new TempDownloadService().download(segmentUrls, targetFile, header, downloadStatus, SegmentVideoService::mergeVideo);
     }
 
     /**
@@ -39,16 +37,15 @@ public class SegmentVideoService {
      * @param targetFile   目标文件
      */
     private static void mergeVideo(List<File> segmentFiles, File targetFile, DownloadItem downloadStatus) {
-        log.info("开始合并...");
         ServiceUtils.waitingDownloadFinish(segmentFiles, files -> {
             MergeVideo.exec(files, targetFile, new FFMpegListener() {
-
                 @Override
                 public void start() {
                     downloadStatus.setStatusFormat("正在合并...");
-                    downloadStatus.setStatus(DownloadStatus.MERGE);
+                    downloadStatus.setStatus(DownloadStatus.MERGING);
+                    downloadStatus.setProgress(0D);
+                    downloadStatus.setProgressFormat("0%");
                 }
-
                 @Override
                 public void progress(long current, long total) {
                     downloadStatus.setProgress((double) current / total * 100);
@@ -58,6 +55,9 @@ public class SegmentVideoService {
                 @Override
                 public void over() {
                     downloadStatus.setStatusFormat("合并完成!");
+                    downloadStatus.setStatus(DownloadStatus.FINISHED);
+                    downloadStatus.setProgress(100D);
+                    downloadStatus.setProgressFormat("100%");
                     // 合并完成后删除下载的临时文件
                     segmentFiles.forEach(FileUtils::deleteOnExists);
                 }

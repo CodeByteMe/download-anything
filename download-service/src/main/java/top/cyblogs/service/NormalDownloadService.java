@@ -2,7 +2,6 @@ package top.cyblogs.service;
 
 import lombok.extern.slf4j.Slf4j;
 import top.cyblogs.data.BaseData;
-import top.cyblogs.data.DownloadList;
 import top.cyblogs.data.SettingsData;
 import top.cyblogs.download.BaseDownloadListener;
 import top.cyblogs.download.DownloadUtils;
@@ -10,6 +9,8 @@ import top.cyblogs.model.DownloadItem;
 import top.cyblogs.model.enums.DownloadStatus;
 import top.cyblogs.output.Aria2cStatus;
 import top.cyblogs.util.FileUtils;
+import top.cyblogs.util.StringUtils;
+import top.cyblogs.utils.ServiceUtils;
 
 import java.io.File;
 import java.util.Map;
@@ -25,7 +26,6 @@ public class NormalDownloadService {
     private Integer currentRetryCount = 0;
 
     public static void download(String url, File targetFile, Map<String, String> header, DownloadItem downloadStatus) {
-        DownloadList.list.add(downloadStatus);
         new NormalDownloadService().execDownload(url, targetFile, header, downloadStatus);
     }
 
@@ -36,7 +36,24 @@ public class NormalDownloadService {
      * @param header     下载所需的请求头
      */
     private void execDownload(String url, File targetFile, Map<String, String> header, DownloadItem downloadStatus) {
+
+        downloadStatus.setDownloadId(StringUtils.md5(targetFile.getAbsolutePath()));
+        String name = targetFile.getName();
+        downloadStatus.setFileName(name.substring(0, name.lastIndexOf(".")));
+        downloadStatus.setTargetPath(targetFile.getAbsolutePath());
+        downloadStatus.setStatus(DownloadStatus.WAITING);
+        downloadStatus.setStatusFormat("等待下载...");
+        downloadStatus.setProgressFormat("0%");
+        downloadStatus.setProgress(0D);
+        ServiceUtils.addToList(downloadStatus);
+
         if (SettingsData.skipIfExists && targetFile.exists()) {
+            downloadStatus.setStatusFormat("文件已存在!");
+            downloadStatus.setStatus(DownloadStatus.FINISHED);
+            downloadStatus.setCurrentSpeed(null);
+            downloadStatus.setTotalSize(FileUtils.fileLength(targetFile.length()));
+            downloadStatus.setProgressFormat("100%");
+            downloadStatus.setProgress(100D);
             return;
         }
 
@@ -49,16 +66,9 @@ public class NormalDownloadService {
                 downloadStatus.setStatusFormat("正在下载...");
                 downloadStatus.setStatus(DownloadStatus.DOWNLOADING);
                 downloadStatus.setCurrentSpeed(FileUtils.fileLength(status.getDownloadSpeed()) + "/S");
-                String name = targetFile.getName();
-                downloadStatus.setFileName(name.substring(0, name.lastIndexOf(".")));
                 downloadStatus.setTotalSize(FileUtils.fileLength(status.getTotalLength()));
-                downloadStatus.setTargetPath(targetFile.getAbsolutePath());
-            }
-
-            @Override
-            public void waiting(Aria2cStatus status) {
-                downloadStatus.setStatus(DownloadStatus.WAITING);
-                downloadStatus.setStatusFormat("等待下载...");
+                downloadStatus.setProgress((double) status.getCompletedLength() / status.getTotalLength() * 100);
+                downloadStatus.setProgressFormat(ServiceUtils.ratioString(status.getCompletedLength(), status.getTotalLength(), true));
             }
 
             @Override
@@ -66,6 +76,7 @@ public class NormalDownloadService {
                 super.paused(status);
             }
 
+            // TODO 需要测试
             @Override
             public void error(Aria2cStatus status) {
                 downloadStatus.setStatusFormat("重试下载...");
@@ -80,6 +91,8 @@ public class NormalDownloadService {
                 downloadStatus.setStatusFormat("下载完成!");
                 downloadStatus.setStatus(DownloadStatus.FINISHED);
                 downloadStatus.setCurrentSpeed(null);
+                downloadStatus.setProgress(100D);
+                downloadStatus.setProgressFormat("100%");
             }
 
             @Override

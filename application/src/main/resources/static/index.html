@@ -70,20 +70,20 @@
                         class="list-group-item d-flex align-items-center">
                         <i class="fas fa-download mr-3"></i>
                         <span class="mr-auto">下载中</span>
-                        <span class="badge badge-primary badge-pill">12</span>
+                        <span class="badge badge-primary badge-pill">{{downloadingCount}}</span>
                     </li>
                     <li :class="currentPage === 'finished' ? 'list-group-item-secondary' : ''"
                         @click="changePage('finished')"
                         class="list-group-item d-flex align-items-center">
                         <i class="fas fa-check-circle mr-3"></i>
                         <span class="mr-auto">已完成</span>
-                        <span class="badge badge-primary badge-pill">34</span>
+                        <span class="badge badge-primary badge-pill">{{finishedCount}}</span>
                     </li>
                     <li :class="currentPage === 'trash' ? 'list-group-item-secondary' : ''" @click="changePage('trash')"
                         class="list-group-item d-flex align-items-center">
                         <i class="fas fa-trash mr-3"></i>
                         <span class="mr-auto">垃圾箱</span>
-                        <span class="badge badge-primary badge-pill">122</span>
+                        <span class="badge badge-primary badge-pill">{{trashCount}}</span>
                     </li>
                     <li :class="currentPage === 'setting' ? 'list-group-item-secondary' : ''"
                         @click="changePage('setting')"
@@ -99,11 +99,11 @@
                 <div class="card mt-4">
                     <h5 class="card-header"><i class="fas fa-arrow-alt-circle-down mr-2"></i>下载详情</h5>
                     <div class="card-body">
-                        <p class="card-text">
-                        <p><i class="fas fa-greater-than-equal mr-3"></i>速度: 100MB/S</p>
-                        <p><i class="fas fa-spinner mr-3"></i>进度: 16%</p>
-                        <p><i class="fas fa-hourglass-start mr-3"></i>剩余10分钟</p>
-                        </p>
+                        <div class="card-text">
+                            <p><i class="fas fa-greater-than-equal mr-3"></i>速度: 100MB/S</p>
+                            <p><i class="fas fa-spinner mr-3"></i>进度: 16%</p>
+                            <p><i class="fas fa-hourglass-start mr-3"></i>剩余10分钟</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -212,34 +212,34 @@
                         <!-- 第一行信息 -->
                         <section class="d-flex">
 									<span class="font-weight-bold mr-auto download-title">
-										文件名称保留文件名称保留文件名称保留文件名称保留文件名称保留文件名称保留文件名称保留文件名称保留文件名称保留文件名称保留文件名称保留文件名称保留
+										{{item.fileName}}
 									</span>
                             <div class="text-muted download-status-lg">
-                                正在下载中...
+                                {{item.statusFormat}}
                             </div>
                         </section>
                         <!-- 第二行信息 -->
                         <section class="d-flex">
                             <div class="mr-auto text-muted">
-                                总大小: 2333MB
+                                大小: {{item.totalSize}}
                             </div>
                             <div class="text-muted download-status-sm">
-                                正在下载中...
+                                {{item.statusFormat}}
                             </div>
                             <div class="text-muted target-path">
-                                目标位置: C:/Downloads/文件名称.mp4
+                                位置: {{item.targetPath.replace(/(.{8})(.*)(.{12})/, "$1……$3")}}
                             </div>
                         </section>
                         <!-- 第三行信息 -->
                         <section class="d-flex">
                             <div class="mr-auto">
-                                来源: <span class="text-danger">慕课网</span>
+                                来源: <span class="text-danger">{{item.source}}</span>
                             </div>
                             <div class="text-muted">
-                                30MB/S
+                                {{item.currentSpeed}}
                             </div>
                             <div class="ml-2 text-muted">
-                                100%
+                                {{item.progressFormat}}
                             </div>
                         </section>
                     </div>
@@ -260,7 +260,11 @@
                     </section>
                 </div>
                 <!-- 进度条 -->
-                <div class="bg-danger" style="width: 30%; height: 3px;"></div>
+                <div style="background-color: darkgrey">
+                    <div :class="item.status === 'DOWNLOADING' ? 'bg-danger' : item.status === 'MERGING' ? 'bg-info' : item.status === 'FINISHED' ? 'bg-success' : ''"
+                         :style="`width: ${item.progress}%;`" style="height: 3px;"></div>
+                </div>
+
             </section>
 
 
@@ -322,9 +326,7 @@
 <script crossorigin="anonymous"
         integrity="sha256-WqU1JavFxSAMcLP2WIOI+GB2zWmShMI82mTpLDcqFUg="
         src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68="
-        src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
 <script crossorigin="anonymous"
         integrity="sha256-bcjoJPe5pw5r6MHD5/5MYTmmQfjC/HEEIZ4Ya4cgJiE="
         src="https://cdn.jsdelivr.net/npm/sweetalert2@9.8.1/dist/sweetalert2.all.min.js"></script>
